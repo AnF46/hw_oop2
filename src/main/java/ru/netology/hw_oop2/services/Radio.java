@@ -1,10 +1,12 @@
 package ru.netology.hw_oop2.services;
+
 public class Radio {
     //stations
     private int currentStation;
+
     public int getCurrentStation() {
         return currentStation;
-    };
+    }
 
     public void setCurrentStation(int newCurrentStation) {
         if (newCurrentStation > 9) {
@@ -62,10 +64,10 @@ public class Radio {
 
     public void decreaseVolume() {
         int lessVolume = currentVolume - 1;
-            if (currentVolume > 0) {
-                setCurrentVolume(lessVolume);
-            } else {
-                getCurrentVolume();
-            }
+        if (currentVolume > 0) {
+            setCurrentVolume(lessVolume);
+        } else {
+            getCurrentVolume();
+        }
     }
 }

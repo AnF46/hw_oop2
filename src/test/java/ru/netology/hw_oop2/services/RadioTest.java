@@ -1,13 +1,14 @@
 package ru.netology.hw_oop2.services;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
     Radio station = new Radio();
     Radio volume = new Radio();
+
     @Test
     public void shouldSetNewStation() {
-
         station.setCurrentStation(3);
 
         int expected = 3;
@@ -30,16 +31,26 @@ public class RadioTest {
 
     @Test
     public void shouldNotSetAboveMaxStation() {
-         station.setCurrentStation(10);
+        station.setCurrentStation(10);
 
-         int expected = 0;
-         int actual = station.getCurrentStation();
+        int expected = 0;
+        int actual = station.getCurrentStation();
 
-         Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotSetLessMinStation() {
+    public void shouldNotSetBelowMinStation() {
+        station.setCurrentStation(-1);
+
+        int expected = 0;
+        int actual = station.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLessMinStation() {
         station.setCurrentStation(9);
         station.prevStation();
 
@@ -86,6 +97,27 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldNotSetAboveMaxVolume() {
+        volume.setCurrentVolume(101);
+
+        int expected = 0;
+        int actual = volume.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetLessMinVolume() {
+        volume.setCurrentVolume(-1);
+
+        int expected = 0;
+        int actual = volume.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void shouldIncreaseVolume() {
         volume.setCurrentVolume(60);
         volume.increaseVolume();
@@ -97,7 +129,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetAboveMaxVolume() {
+    public void shouldNotSetMoreVolume() {
         volume.setCurrentVolume(100);
         volume.increaseVolume();
 
@@ -108,7 +140,18 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetBelowMinVolume() {
+    public void shouldSetLessVolume() {
+        volume.setCurrentVolume(50);
+        volume.decreaseVolume();
+
+        int expected = 49;
+        int actual = volume.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetLessVolume() {
         volume.setCurrentVolume(0);
         volume.decreaseVolume();
 
@@ -117,5 +160,4 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
 }
