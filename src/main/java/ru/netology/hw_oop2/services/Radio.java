@@ -102,7 +102,7 @@ public class Radio {
         int lessVolume = currentVolume - 1;
         if (currentVolume < maxVolume) {
             setCurrentVolume(lessVolume);
-        } else {
+        } else if (currentVolume <=minVolume) {
             currentVolume = minVolume;
         }
     }

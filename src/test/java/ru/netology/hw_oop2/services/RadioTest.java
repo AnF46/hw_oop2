@@ -145,11 +145,7 @@ public class RadioTest {
         volume.setCurrentVolume(-5);
         volume.decreaseVolume();
 
-        int expected = 0;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
-
+        Assertions.assertEquals(0,volume.getCurrentVolume());
     }
 
     @Test
