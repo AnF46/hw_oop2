@@ -14,6 +14,13 @@ public class RadioTest {
     }
 
     @Test
+    public void notSetAbouveDefault() {
+        defaultStations.setCurrentStation(15);
+
+        Assertions.assertEquals(0,defaultStations.getCurrentStation());
+    }
+
+    @Test
     public void shouldSetQuantityOfStations() {
         Assertions.assertEquals(15, qtyOfStations.getNumberOfStations());
     }
@@ -53,9 +60,21 @@ public class RadioTest {
         Assertions.assertEquals(14, qtyOfStations.getCurrentStation());
     }
 
+    @Test
+    public void setNextStation() {
+        qtyOfStations.setCurrentStation(8);
+        qtyOfStations.nextStation();
 
+        Assertions.assertEquals(9, qtyOfStations.getCurrentStation());
+    }
 
+    @Test
+    public void setPrevStation() {
+        qtyOfStations.setCurrentStation(5);
+        qtyOfStations.prevStation();
 
+        Assertions.assertEquals(4, qtyOfStations.getCurrentStation());
+    }
 
     //VOLUME TESTS
 
@@ -94,10 +113,27 @@ public class RadioTest {
     }
 
     @Test
+    public void notIncreaseVolumeAfterMax() {
+        volume.setCurrentVolume(100);
+        volume.increaseVolume();
+
+        Assertions.assertEquals(100, volume.getCurrentVolume());
+    }
+
+    @Test
     public void shouldDecreaseVolume() {
         volume.setCurrentVolume(99);
         volume.decreaseVolume();
 
         Assertions.assertEquals(98, volume.getCurrentVolume());
     }
+
+    @Test
+    public void notDecreaseVolumeAfterMin() {
+        volume.setCurrentVolume(0);
+        volume.decreaseVolume();
+
+        Assertions.assertEquals(0, volume.getCurrentVolume());
+    }
+
 }
