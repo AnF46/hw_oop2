@@ -22,15 +22,13 @@ public class RadioTest {
     public void shouldSetNewStation() {
         qtyOfStations.setCurrentStation(3);
 
-        int expected = 3;
-        int actual = qtyOfStations.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(3, qtyOfStations.getCurrentStation());
     }
 
     @Test
     public void maxStation() {
-        Assertions.assertEquals(14,qtyOfStations.getMaxStation());
+
+        Assertions.assertEquals(14, qtyOfStations.getMaxStation());
     }
 
    @Test
@@ -52,75 +50,11 @@ public class RadioTest {
         qtyOfStations.prevStation();
 
         Assertions.assertEquals(14, qtyOfStations.getCurrentStation());
-   }
-
-
-
-
-    /*@Test
-    public void shouldSetZeroAfterNine() {
-
-        station.setCurrentStation(9);
-        station.nextStation();
-
-        int expected = 0;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void shouldNotSetAboveMaxStation() {
-        station.setCurrentStation(10);
 
-        int expected = 0;
-        int actual = station.getCurrentStation();
 
-        Assertions.assertEquals(expected, actual);
-    }
 
-    @Test
-    public void shouldNotSetBelowMinStation() {
-        station.setCurrentStation(-1);
-
-        int expected = 0;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetLessMinStation() {
-        station.setCurrentStation(9);
-        station.prevStation();
-
-        int expected = 8;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetNextStation() {
-        station.setCurrentStation(7);
-        station.nextStation();
-
-        int expected = 8;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetNineAfterZero() {
-        station.setCurrentStation(0);
-        station.prevStation();
-
-        int expected = 9;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }*/
 
     //VOLUME TESTS
 
@@ -135,9 +69,8 @@ public class RadioTest {
     @Test
     public void shouldNotSetAboveMaxVolume() {
         volume.setCurrentVolume(120);
-        volume.increaseVolume();
 
-        Assertions.assertEquals(100, volume.getCurrentVolume());
+        Assertions.assertEquals(0, volume.getCurrentVolume());
     }
 
     @Test
