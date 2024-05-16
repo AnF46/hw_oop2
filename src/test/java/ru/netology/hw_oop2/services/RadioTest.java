@@ -6,17 +6,18 @@ public class RadioTest {
 
     Radio qtyOfStations = new Radio(15);
     Radio volume = new Radio(100, 0);
-    //Radio defaultStations = new Radio(10);
+    Radio defaultStations = new Radio(10);
+
+    @Test
+    public void setDefaultNumbersOfStation() {
+        Assertions.assertEquals(10, defaultStations.getNumberOfStations());
+    }
+
     @Test
     public void shouldSetQuantityOfStations() {
         Assertions.assertEquals(15, qtyOfStations.getNumberOfStations());
     }
 
-    /*@Test
-    public void setDefaultNumbersOfStation() {
-        Radio defaultStations = new Radio();
-        Assertions.assertEquals(10, defaultStations.getNumberOfStations());
-    }*/
 
     @Test
     public void shouldSetNewStation() {

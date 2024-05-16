@@ -3,8 +3,8 @@ package ru.netology.hw_oop2.services;
 public class Radio {
     //stations
 
-    //private final int defaultNumbersOfStations = 10;
     private int numberOfStations;
+    private final int DEFAULT_NUMBER_OF_STATIONS = 10;
     private int currentStation;
     private final int minStation = 0;
     private int maxStation;
@@ -17,14 +17,15 @@ public class Radio {
         this.numberOfStations = numberOfStations;
     }
 
+    public Radio() {
+
+    }
+
     public Radio(int maxVolume, int minVolume) {
         this.maxVolume = 100;
         this.minVolume = 0;
     }
-
-    /*public Radio() {
-        this.defaultNumbersOfStations = defaultNumberOfStations;
-    }*/
+    
 
     public int getNumberOfStations() {
         return numberOfStations;
@@ -53,6 +54,22 @@ public class Radio {
         currentStation = newCurrentStation;
     }
 
+    //VOLUME
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        if (newCurrentVolume < minVolume) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
+    }
+
+    //STATION METHODS
     public void nextStation() {
         int newsStation = currentStation + 1;
         if (currentStation < maxStation) {
@@ -71,21 +88,7 @@ public class Radio {
         }
     }
 
-    //volume
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume > maxVolume) {
-            return;
-        }
-        if (newCurrentVolume < minVolume) {
-            return;
-        }
-        currentVolume = newCurrentVolume;
-    }
+    //volume METHODS
 
     public void increaseVolume() {
         int moreVolume = currentVolume + 1;
