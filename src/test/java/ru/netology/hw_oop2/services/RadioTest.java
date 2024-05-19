@@ -121,6 +121,14 @@ public class RadioTest {
     }
 
     @Test
+    public void increaseIfMinVolume() {
+        volume.setCurrentVolume(0);
+        volume.increaseVolume();
+
+        Assertions.assertEquals(0, volume.getCurrentVolume());
+    }
+
+    @Test
     public void shouldDecreaseVolume() {
         volume.setCurrentVolume(99);
         volume.decreaseVolume();
@@ -135,5 +143,4 @@ public class RadioTest {
 
         Assertions.assertEquals(0, volume.getCurrentVolume());
     }
-
 }
