@@ -45,6 +45,13 @@ public class RadioTest {
    }
 
    @Test
+   public void set() {
+        qtyOfStations.setCurrentStation(-1);
+
+        Assertions.assertEquals(0, qtyOfStations.getCurrentStation());
+   }
+
+   @Test
     public void setMinAfterMaxIfNext() {
         qtyOfStations.setCurrentStation(14);
         qtyOfStations.nextStation();
@@ -143,4 +150,7 @@ public class RadioTest {
 
         Assertions.assertEquals(0, volume.getCurrentVolume());
     }
+
+
+
 }
