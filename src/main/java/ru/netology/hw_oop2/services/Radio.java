@@ -18,7 +18,7 @@ public class Radio {
     }
 
     public Radio() {
-
+        this.numberOfStations = DEFAULT_NUMBER_OF_STATIONS;
     }
 
     public Radio(int maxVolume, int minVolume) {
@@ -94,7 +94,7 @@ public class Radio {
         int moreVolume = currentVolume + 1;
         if (currentVolume > minVolume) {
             setCurrentVolume(moreVolume);
-        } else if (currentVolume >= maxVolume) {
+        } if (currentVolume >= maxVolume) {
             currentVolume = maxVolume;
         } else if (currentVolume <= minVolume) {
             currentVolume = minVolume;
@@ -104,9 +104,9 @@ public class Radio {
 
     public void decreaseVolume() {
         int lessVolume = currentVolume - 1;
-        if (currentVolume < maxVolume) {
+        if (currentVolume <= maxVolume) {
             setCurrentVolume(lessVolume);
-        } else if (currentVolume <= minVolume) {
+        } if (currentVolume <= minVolume) {
             currentVolume = minVolume;
         }
     }

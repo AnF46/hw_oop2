@@ -14,6 +14,16 @@ public class RadioTest {
     }
 
     @Test
+    public void executeEmptyConstructor() {
+        Radio emptyRadioConstructor = new Radio();
+
+        int expected = 10;
+        int actual = emptyRadioConstructor.getNumberOfStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void notSetAbouveDefault() {
         defaultStations.setCurrentStation(15);
 
@@ -141,6 +151,14 @@ public class RadioTest {
         volume.decreaseVolume();
 
         Assertions.assertEquals(98, volume.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldDecreaseVolumeIfMax() {
+        volume.setCurrentVolume(100);
+        volume.decreaseVolume();
+
+        Assertions.assertEquals(99, volume.getCurrentVolume());
     }
 
     @Test
