@@ -1,120 +1,121 @@
 package ru.netology.hw_oop2.services;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
-    Radio station = new Radio();
-    Radio volume = new Radio();
+
+    Radio qtyOfStations = new Radio(15);
+    Radio volume = new Radio(100, 0);
+    Radio defaultStations = new Radio(10);
+
+    @Test
+    public void setDefaultNumbersOfStation() {
+        Assertions.assertEquals(10, defaultStations.getNumberOfStations());
+    }
+
+    @Test
+    public void executeEmptyConstructor() {
+        Radio emptyRadioConstructor = new Radio();
+
+        int expected = 10;
+        int actual = emptyRadioConstructor.getNumberOfStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void notSetAbouveDefault() {
+        defaultStations.setCurrentStation(15);
+
+        Assertions.assertEquals(0,defaultStations.getCurrentStation());
+    }
+
+    @Test
+    public void shouldSetQuantityOfStations() {
+        Assertions.assertEquals(15, qtyOfStations.getNumberOfStations());
+    }
+
 
     @Test
     public void shouldSetNewStation() {
-        station.setCurrentStation(3);
+        qtyOfStations.setCurrentStation(3);
 
-        int expected = 3;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(3, qtyOfStations.getCurrentStation());
     }
 
     @Test
-    public void shouldSetZeroAfterNine() {
+    public void maxStation() {
 
-        station.setCurrentStation(9);
-        station.nextStation();
+        Assertions.assertEquals(14, qtyOfStations.getMaxStation());
+    }
 
-        int expected = 0;
-        int actual = station.getCurrentStation();
+   @Test
+    public void shouldSetMinStation() {
+        Assertions.assertEquals(0, qtyOfStations.getMinStation());
+   }
 
-        Assertions.assertEquals(expected, actual);
+   @Test
+   public void set() {
+        qtyOfStations.setCurrentStation(-1);
+
+        Assertions.assertEquals(0, qtyOfStations.getCurrentStation());
+   }
+
+   @Test
+    public void setMinAfterMaxIfNext() {
+        qtyOfStations.setCurrentStation(14);
+        qtyOfStations.nextStation();
+
+        Assertions.assertEquals(0, qtyOfStations.getCurrentStation());
+   }
+
+   @Test
+    public void setMaxAfterMinIfPrev() {
+        qtyOfStations.setCurrentStation(0);
+        qtyOfStations.prevStation();
+
+        Assertions.assertEquals(14, qtyOfStations.getCurrentStation());
     }
 
     @Test
-    public void shouldNotSetAboveMaxStation() {
-        station.setCurrentStation(10);
+    public void setNextStation() {
+        qtyOfStations.setCurrentStation(8);
+        qtyOfStations.nextStation();
 
-        int expected = 0;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(9, qtyOfStations.getCurrentStation());
     }
 
     @Test
-    public void shouldNotSetBelowMinStation() {
-        station.setCurrentStation(-1);
+    public void setPrevStation() {
+        qtyOfStations.setCurrentStation(5);
+        qtyOfStations.prevStation();
 
-        int expected = 0;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetLessMinStation() {
-        station.setCurrentStation(9);
-        station.prevStation();
-
-        int expected = 8;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetNextStation() {
-        station.setCurrentStation(7);
-        station.nextStation();
-
-        int expected = 8;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetNineAfterZero() {
-        station.setCurrentStation(0);
-        station.prevStation();
-
-        int expected = 9;
-        int actual = station.getCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(4, qtyOfStations.getCurrentStation());
     }
 
     //VOLUME TESTS
 
     @Test
-    public void shouldASetVolume() {
-
+    public void shouldSetVolume() {
         volume.setCurrentVolume(50);
 
-        int expected = 50;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
-
+        Assertions.assertEquals(50, volume.getCurrentVolume());
     }
+
 
     @Test
     public void shouldNotSetAboveMaxVolume() {
-        volume.setCurrentVolume(101);
+        volume.setCurrentVolume(120);
 
-        int expected = 0;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, volume.getCurrentVolume());
     }
 
     @Test
     public void shouldNotSetLessMinVolume() {
-        volume.setCurrentVolume(-1);
+        volume.setCurrentVolume(-5);
+        volume.decreaseVolume();
 
-        int expected = 0;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
-
+        Assertions.assertEquals(0,volume.getCurrentVolume());
     }
 
     @Test
@@ -129,35 +130,45 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetMoreVolume() {
+    public void notIncreaseVolumeAfterMax() {
         volume.setCurrentVolume(100);
         volume.increaseVolume();
 
-        int expected = 100;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(100, volume.getCurrentVolume());
     }
 
     @Test
-    public void shouldSetLessVolume() {
-        volume.setCurrentVolume(50);
+    public void increaseIfMinVolume() {
+        volume.setCurrentVolume(0);
+        volume.increaseVolume();
+
+        Assertions.assertEquals(0, volume.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldDecreaseVolume() {
+        volume.setCurrentVolume(99);
         volume.decreaseVolume();
 
-        int expected = 49;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(98, volume.getCurrentVolume());
     }
 
     @Test
-    public void shouldNotSetLessVolume() {
+    public void shouldDecreaseVolumeIfMax() {
+        volume.setCurrentVolume(100);
+        volume.decreaseVolume();
+
+        Assertions.assertEquals(99, volume.getCurrentVolume());
+    }
+
+    @Test
+    public void notDecreaseVolumeAfterMin() {
         volume.setCurrentVolume(0);
         volume.decreaseVolume();
 
-        int expected = 0;
-        int actual = volume.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, volume.getCurrentVolume());
     }
+
+
+
 }
